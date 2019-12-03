@@ -28,6 +28,7 @@ fn main() {
         	},
         	Err(..) => {
         		println!("this was not an integer: {}", trimmed);
+        		main();
         	},
     	};
 	}
@@ -61,9 +62,28 @@ fn main() {
         		},
         		Err(..) => {
         			println!("this was not an integer: {}", trimmed);
+        			main();
         		},
     		};
     	}
 	}
 	println!("I guess: {}{}{}{}{}{}", final_result[5], final_result[4], final_result[3], final_result[2], final_result[1], final_result[0]);
+
+	let mut input_text = String::new();
+    io::stdin().read_line(&mut input_text).expect("failed to read from stdin");
+    let trimmed = input_text.trim();
+    match trimmed.parse::<i32>() {
+    	Ok(res) => {
+    		if res==60 {
+    			println!("I guessed it!");
+    			exit(0);
+    		} else {
+    			main();
+    		}
+    	},
+    	Err(..) => {
+    		println!("this was not an integer: {}", trimmed);
+    		main();
+    	},
+    };
 }
